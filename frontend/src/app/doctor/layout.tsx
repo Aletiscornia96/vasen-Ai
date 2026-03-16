@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { CalendarDays, LogOut } from 'lucide-react';
+import { CalendarDays, LogOut, Clock } from 'lucide-react';
 import styles from './DoctorLayout.module.css';
 
 export default function DoctorLayout({ children }: { children: React.ReactNode }) {
