@@ -1,0 +1,2 @@
+DESIGN OVERRIDE:
+The visual design quality is a top priority. Do not treat this as a backend-first admin CRUD project. This is also a brand and product presentation website. The homepage and booking flow should feel intentionally designed, elegant, premium, and modern. Spend significant effort on layout, spacing, hierarchy, CTA sections, section transitions, card design, form styling, and responsive behavior. The result should feel closer to a polished startup or clinic website than to a student project.
