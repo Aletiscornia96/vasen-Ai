@@ -7,8 +7,8 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
           <div className={styles.logo}>
-            <span className={styles.logoText}>VASEN</span>
-            <span className={styles.logoSub}>ESTÉTICA</span>
+                <span className={styles.brandName}>VASEN</span>
+                <span className={styles.brandTag}>Estética</span>
           </div>
           <p className={styles.description}>
             Un espacio dedicado a resaltar tu belleza natural con 
