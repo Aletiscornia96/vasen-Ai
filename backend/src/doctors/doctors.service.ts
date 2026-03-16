@@ -31,12 +31,20 @@ export class DoctorsService {
   }
 
   async create(createDoctorDto: any) {
-    const createdDoctor = new this.doctorModel(createDoctorDto);
-    return createdDoctor.save();
+    const created = new this.doctorModel(createDoctorDto);
+    return created.save();
   }
 
   async update(id: string, updateDoctorDto: any) {
     return this.doctorModel.findByIdAndUpdate(id, updateDoctorDto, { new: true }).exec();
+  }
+
+  async updateSettings(id: string, settings: { slotDuration: number }) {
+    return this.doctorModel.findByIdAndUpdate(id, { slotDuration: settings.slotDuration }, { new: true }).exec();
+  }
+
+  async updateSchedule(id: string, schedule: Record<string, string[]>) {
+    return this.doctorModel.findByIdAndUpdate(id, { weeklySchedule: schedule }, { new: true }).exec();
   }
 
   // Soft delete / Deactivate

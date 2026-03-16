@@ -37,7 +37,7 @@ export class Appointment {
   @Prop({ type: PatientInfo, required: true })
   patient: PatientInfo;
 
-  @Prop({ default: 'pendiente', enum: ['pendiente', 'completado', 'ausente', 'incompleto', 'cancelado'] })
+  @Prop({ default: 'pendiente', enum: ['pendiente', 'completado', 'ausente', 'incompleto', 'cancelado', 'bloqueado'] })
   status: string;
 }
 

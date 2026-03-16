@@ -22,16 +22,18 @@ export class SlotsService {
       return []; // Not working this day
     }
 
-    // Generate all possible 30 min slots for the day
+    const slotDuration = doctor.slotDuration || 30;
+
+    // Generate all possible slots for the day based on doctor's preference
     const possibleSlots: string[] = [];
     for (const range of daySchedule) {
       const [startStr, endStr] = range.split('-');
       let current = this.timeToMinutes(startStr);
       const end = this.timeToMinutes(endStr);
 
-      while (current + 30 <= end) {
+      while (current + slotDuration <= end) {
         possibleSlots.push(this.minutesToTime(current));
-        current += 30;
+        current += slotDuration;
       }
     }
 

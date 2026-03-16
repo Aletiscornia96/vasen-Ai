@@ -1,0 +1,223 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 1.5rem;
+}
+
+.headerIcon {
+  color: var(--olive);
+}
+
+.cardHeader h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--charcoal);
+}
+
+.cardHeader p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.settingGroup {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settingGroup label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+
+.select {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.scheduleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scheduleGrid h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dayRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dayName {
+  font-weight: 500;
+  color: #475569;
+}
+
+.input {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--olive);
+}
+
+.footer {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1.5rem;
+}
+
+.saveBtn {
+  background: var(--olive);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.successMsg {
+  color: #166534;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Empty State / Bloqueos */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  color: #64748b;
+  gap: 1rem;
+}
+
+.secondaryBtn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.blockForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.blockBtn {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 44px;
+  transition: all 0.2s;
+}
+
+.blockBtn:hover {
+  background: #e2e8f0;
+  color: var(--charcoal);
+}
+
+@media (max-width: 640px) {
+  .dayRow {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .blockForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

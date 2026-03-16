@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Appointment, AppointmentDocument } from './appointment.schema';
 
 export class CreateAppointmentDto {
@@ -35,6 +35,21 @@ export class AppointmentsService {
     }
 
     const created = new this.appointmentModel(createDto);
+    return created.save();
+  }
+
+  async block(doctorId: string, blockDto: { date: string, timeStart: string, timeEnd: string }) {
+    const created = new this.appointmentModel({
+      ...blockDto,
+      doctorId,
+      specialtyId: new Types.ObjectId(), // Virtual specialty for blocks
+      patient: {
+        fullName: 'BLOQUEO PROFESIONAL',
+        email: 'admin@vasen.com',
+        phone: '000-000'
+      },
+      status: 'bloqueado'
+    });
     return created.save();
   }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Body, Param, Query, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Request, Query } from '@nestjs/common';
 import { AppointmentsService, CreateAppointmentDto } from './appointments.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -13,6 +13,12 @@ export class AppointmentsController {
   }
 
   // Admin / Protected
+  @UseGuards(JwtAuthGuard)
+  @Post('block')
+  block(@Request() req, @Body() blockDto: { date: string, timeStart: string, timeEnd: string }) {
+    return this.appointmentsService.block(req.user.doctorId, blockDto);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get('stats')
   async getStats() {

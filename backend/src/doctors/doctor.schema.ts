@@ -19,6 +19,9 @@ export class Doctor {
   @Prop({ type: Object, default: {} })
   weeklySchedule: Record<string, string[]>;
 
+  @Prop({ default: 30 })
+  slotDuration: number;
+
   @Prop({ default: true })
   isActive: boolean;
 }

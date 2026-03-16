@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Patch, Param, Delete, UseGuards, Request, Query } from '@nestjs/common';
 import { DoctorsService } from './doctors.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -13,6 +13,24 @@ export class DoctorsController {
       return this.doctorsService.findBySpecialty(specialtyId);
     }
     return this.doctorsService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  getMe(@Request() req) {
+    return this.doctorsService.findById(req.user.doctorId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me/settings')
+  updateSettings(@Request() req, @Body() settings: { slotDuration: number }) {
+    return this.doctorsService.updateSettings(req.user.doctorId, settings);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me/schedule')
+  updateSchedule(@Request() req, @Body() schedule: Record<string, string[]>) {
+    return this.doctorsService.updateSchedule(req.user.doctorId, schedule);
   }
 
   // Admin

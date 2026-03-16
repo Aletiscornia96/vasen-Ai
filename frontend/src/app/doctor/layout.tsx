@@ -60,6 +60,13 @@ export default function DoctorLayout({ children }: { children: React.ReactNode }
             <CalendarDays size={20} />
             <span>Mi Agenda</span>
           </Link>
+          <Link 
+            href="/doctor/disponibilidad"
+            className={`${styles.navItem} ${pathname === '/doctor/disponibilidad' ? styles.active : ''}`}
+          >
+            <Clock size={20} />
+            <span>Mi Disponibilidad</span>
+          </Link>
         </nav>
 
         <div className={styles.sidebarFooter}>
