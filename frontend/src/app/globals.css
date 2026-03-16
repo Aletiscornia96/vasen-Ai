@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════
+   VASEN ESTÉTICA — Design System
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* Brand Colors */
+  --olive: #7D8465;
+  --olive-light: #939B78;
+  --olive-dark: #5E6350;
+  --olive-muted: rgba(125, 132, 101, 0.12);
+  
+  --brown: #A08B70;
+  --brown-light: #B9A68E;
+  --brown-dark: #8A7560;
+  
+  --gold: #C5A55A;
+  --gold-light: #D4BA7A;
+  --gold-dark: #A8894A;
+  
+  --cream: #F5F0EB;
+  --cream-warm: #F0E8DF;
+  --cream-dark: #E8DFD4;
+  
+  --charcoal: #2C2C28;
+  --charcoal-light: #3E3E38;
+  --charcoal-soft: #4A4A44;
+  
+  --white: #FDFCFA;
+  --white-pure: #FFFFFF;
+  
+  /* Typography */
+  --font-display: 'Cormorant Garant', Georgia, serif;
+  --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+  
+  /* Section max-width */
+  --max-width: 1200px;
+  --max-width-narrow: 900px;
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-medium: 0.4s var(--ease-out);
+  --transition-slow: 0.7s var(--ease-out);
+  
+  /* Borders */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+  --radius-round: 50%;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(44, 44, 40, 0.06);
+  --shadow-md: 0 4px 20px rgba(44, 44, 40, 0.08);
+  --shadow-lg: 0 8px 40px rgba(44, 44, 40, 0.12);
+  --shadow-glow: 0 0 40px rgba(197, 165, 90, 0.15);
+}
+
+/* ═══════════════════════════════════════════
+   Reset & Base
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--charcoal);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ═══════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.container--narrow {
+  max-width: var(--max-width-narrow);
+}
+
+/* Section Spacing */
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+.section--olive {
+  background-color: var(--olive);
+  color: var(--cream);
+}
+
+.section--cream {
+  background-color: var(--cream);
+}
+
+.section--charcoal {
+  background-color: var(--charcoal);
+  color: var(--cream);
+}
+
+/* Section Headers */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--olive);
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--charcoal-soft);
+  max-width: 600px;
+}
+
+/* ═══════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children animation */
+.stagger-children .animate-on-scroll:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children .animate-on-scroll:nth-child(2) { transition-delay: 0.12s; }
+.stagger-children .animate-on-scroll:nth-child(3) { transition-delay: 0.19s; }
+.stagger-children .animate-on-scroll:nth-child(4) { transition-delay: 0.26s; }
+.stagger-children .animate-on-scroll:nth-child(5) { transition-delay: 0.33s; }
+.stagger-children .animate-on-scroll:nth-child(6) { transition-delay: 0.40s; }
+.stagger-children .animate-on-scroll:nth-child(7) { transition-delay: 0.47s; }
+
+/* ═══════════════════════════════════════════
+   Scrollbar
+   ═══════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--olive-light);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--olive);
+}

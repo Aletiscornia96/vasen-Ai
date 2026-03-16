@@ -1,0 +1,77 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BookingData } from './BookingWizard';
+import styles from './WizardSteps.module.css';
+import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye } from 'lucide-react';
+
+interface Props {
+  data: BookingData;
+  updateData: (data: Partial<BookingData>) => void;
+  onNext: () => void;
+}
+
+type Specialty = {
+  _id: string;
+  name: string;
+  description: string;
+};
+
+// Map names to Lucide icons
+const getIconForSpecialty = (name: string) => {
+  if (name.includes('Aparatología')) return <Activity size={24} />;
+  if (name.includes('Faciales')) return <Sparkles size={24} />;
+  if (name.includes('Corporales')) return <Hand size={24} />;
+  if (name.includes('Manicuría')) return <Droplet size={24} />;
+  if (name.includes('Masajes')) return <HeartPulse size={24} />;
+  if (name.includes('Cejas')) return <Eye size={24} />;
+  return <Star size={24} />;
+};
+
+export default function Step1Specialty({ data, updateData, onNext }: Props) {
+  const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSpecialties = async () => {
+      try {
+        const res = await axios.get('http://localhost:3001/api/specialties');
+        setSpecialties(res.data);
+      } catch (err) {
+        console.error('Error fetching specialties', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSpecialties();
+  }, []);
+
+  const handleSelect = (s: Specialty) => {
+    updateData({ specialtyId: s._id, specialtyName: s.name });
+    onNext();
+  };
+
+  if (loading) return <div className={styles.loading}>Cargando especialidades...</div>;
+
+  return (
+    <div className={styles.stepContainer}>
+      <h2 className={styles.title}>¿Qué tipo de tratamiento buscás?</h2>
+      <p className={styles.subtitle}>Seleccioná la especialidad para tu turno.</p>
+      
+      <div className={styles.grid}>
+        {specialties.map((s) => (
+          <button
+            key={s._id}
+            className={`${styles.card} ${data.specialtyId === s._id ? styles.cardActive : ''}`}
+            onClick={() => handleSelect(s)}
+          >
+            <div className={styles.cardIcon}>
+              {getIconForSpecialty(s.name)}
+            </div>
+            <h3 className={styles.cardTitle}>{s.name}</h3>
+            <p className={styles.cardDesc}>{s.description}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,76 @@
+.wizardWrapper {
+  padding: 4rem 1.5rem;
+  background: var(--cream);
+  min-height: calc(100vh - 80px); /* viewport minus navbar padding approx */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(125, 132, 101, 0.08); /* olive shadow */
+  overflow: hidden;
+  border: 1px solid rgba(125, 132, 101, 0.1);
+}
+
+.header {
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid rgba(125, 132, 101, 0.1);
+  background: rgba(245, 240, 235, 0.3); /* very light cream */
+}
+
+.progressText {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  height: 4px;
+  background: rgba(125, 132, 101, 0.15);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--olive);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stepContent {
+  padding: 2.5rem;
+}
+
+.errorAlert {
+  margin: 1.5rem 2.5rem 0;
+  padding: 1rem 1.5rem;
+  background: #fdf2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .wizardWrapper {
+    padding: 2rem 1rem;
+  }
+  
+  .header {
+    padding: 1.5rem;
+  }
+  
+  .stepContent {
+    padding: 1.5rem;
+  }
+}
