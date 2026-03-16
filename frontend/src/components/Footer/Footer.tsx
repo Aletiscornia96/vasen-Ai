@@ -6,23 +6,15 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <div className={styles.logoRow}>
-              <svg viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" className={styles.logoSvg}>
-                <path d="M30 5L15 20L30 35L45 20L30 5Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                <path d="M20 25C20 25 25 35 30 35C35 35 40 25 40 25" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                <path d="M15 20C15 20 22 30 30 35C38 30 45 20 45 20" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                <ellipse cx="30" cy="40" rx="12" ry="6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-              </svg>
-              <div>
-                <span className={styles.brandName}>VÄSEN</span>
-                <span className={styles.brandTag}>Estética</span>
-              </div>
-            </div>
-            <p className={styles.brandDesc}>
-              Medicina Estética y Bienestar. Tu espacio de cuidado personal 
-              con tecnología de vanguardia y atención profesional.
-            </p>
+          <div className={styles.logo}>
+            <span className={styles.logoText}>VASEN</span>
+            <span className={styles.logoSub}>ESTÉTICA</span>
           </div>
+          <p className={styles.description}>
+            Un espacio dedicado a resaltar tu belleza natural con 
+            tecnología de avanzada y atención personalizada.
+          </p>
+        </div>
 
           <div className={styles.links}>
             <h4 className={styles.linksTitle}>Navegación</h4>

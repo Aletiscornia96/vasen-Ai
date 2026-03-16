@@ -9,7 +9,7 @@ export default function About() {
             <div className={styles.imageBg}></div>
             <img 
               src="/assets/clinic_about.png" 
-              alt="Väsen Estética - Nuestro espacio" 
+              alt="Vasen Estética - Nuestro espacio" 
               className={styles.image}
             />
             <div className={styles.accentLine}></div>
@@ -22,7 +22,7 @@ export default function About() {
             <em>vos</em>
           </h2>
           <p className={styles.text}>
-            En Väsen Estética creemos que el cuidado personal es un acto de amor propio. 
+            En Vasen Estética creemos que el cuidado personal es un acto de amor propio. 
             Nuestro centro combina tecnología de vanguardia con un enfoque humano y 
             personalizado, brindando tratamientos que realzan tu belleza natural.
           </p>

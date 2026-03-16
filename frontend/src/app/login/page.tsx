@@ -46,7 +46,7 @@ export default function LoginPage() {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.logo}>
-          <h2>VÄSEN</h2>
+          <h2>VASEN</h2>
           <span>Estética</span>
         </div>
         <h1 className={styles.title}>Acceso Plataforma</h1>

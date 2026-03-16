@@ -47,7 +47,7 @@ export default function DoctorLayout({ children }: { children: React.ReactNode }
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <div className={styles.logo}>
-            <h2>VÄSEN</h2>
+            <h2>VASEN</h2>
             <span>Staff Médico</span>
           </div>
         </div>

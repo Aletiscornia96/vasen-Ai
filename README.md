@@ -1,8 +1,8 @@
-# VÄSEN Estética — Plataforma Integral de Gestión y Reservas
+# VASEN Estética — Plataforma Integral de Gestión y Reservas
 
 ![Vasen Aesthetics](https://images.unsplash.com/photo-1570172234562-f67f74585ec7?auto=format&fit=crop&q=80&w=1200)
 
-**VÄSEN Estética** es una solución web de alto nivel diseñada para una clínica de estética moderna. Combina una experiencia de usuario (UX) premium para los pacientes con herramientas robustas de gestión administrativa y médica en tiempo real.
+**VASEN Estética** es una solución web de alto nivel diseñada para una clínica de estética moderna. Combina una experiencia de usuario (UX) premium para los pacientes con herramientas robustas de gestión administrativa y médica en tiempo real.
 
 ---
 
@@ -90,7 +90,7 @@ npm run dev
 ---
 
 ## 🎨 Diseño y UX
-La estética de VÄSEN se basa en una paleta orgánica:
+La estética de VASEN se basa en una paleta orgánica:
 - **Verde Oliva** (#7D8465) para elegancia y calma.
 - **Crema Seda** (#FDFBF7) para fondos limpios.
 - **Tipografía**: Fuentes serif para elegancia y sans-serif para legibilidad moderna.

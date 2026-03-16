@@ -50,7 +50,7 @@ export default function Navbar() {
             </svg>
           </div>
           <div className={styles.logoText}>
-            <span className={styles.logoName}>VÄSEN</span>
+            <span className={styles.logoName}>VASEN</span>
             <span className={styles.logoTagline}>Estética</span>
           </div>
         </Link>
