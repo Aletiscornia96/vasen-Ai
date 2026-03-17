@@ -31,9 +31,15 @@ export default function DoctorAgendaPage() {
   }, []);
 
   const updateStatus = async (id: string, status: string) => {
+    let reason = '';
+    if (status === 'cancelado') {
+      reason = window.prompt('Indique el motivo de la cancelación / inasistencia:') || '';
+      if (!reason.trim()) return alert('El motivo es obligatorio.');
+    }
+
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3001/api/appointments/${id}/status`, { status }, {
+      await axios.patch(`http://localhost:3001/api/appointments/${id}/status`, { status, reason }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchData();
@@ -83,6 +89,13 @@ export default function DoctorAgendaPage() {
               <span>{app.patient.email}</span>
             </div>
 
+            {app.status === 'cancelado' && app.cancellationReason && (
+              <div className={styles.cancellationDetail}>
+                <strong>Motivo de cancelación:</strong>
+                <p>{app.cancellationReason}</p>
+              </div>
+            )}
+
             {app.status === 'pendiente' && (
               <div className={styles.actions}>
                 <button 
@@ -95,11 +108,11 @@ export default function DoctorAgendaPage() {
                   onClick={() => updateStatus(app._id, 'cancelado')}
                   className={styles.cancelBtn}
                 >
-                  <XCircle size={18} /> Ausente
+                  <XCircle size={18} /> Cancelar / No asistió
                 </button>
               </div>
             )}
-            {app.status !== 'pendiente' && (
+            {app.status !== 'pendiente' && app.status !== 'cancelado' && (
               <div className={styles.actionsStatic}>
                 Marcado como {app.status}
               </div>

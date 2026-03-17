@@ -39,6 +39,9 @@ export class Appointment {
 
   @Prop({ default: 'pendiente', enum: ['pendiente', 'completado', 'ausente', 'incompleto', 'cancelado', 'bloqueado'] })
   status: string;
+
+  @Prop()
+  cancellationReason?: string;
 }
 
 export const AppointmentSchema = SchemaFactory.createForClass(Appointment);

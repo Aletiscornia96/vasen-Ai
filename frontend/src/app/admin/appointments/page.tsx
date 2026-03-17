@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { Trash2 } from 'lucide-react';
 import styles from './Appointments.module.css';
 
 export default function AdminAppointmentsPage() {
@@ -28,6 +29,26 @@ export default function AdminAppointmentsPage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleUpdateStatus = async (id: string, status: string) => {
+    let reason = '';
+    if (status === 'cancelado') {
+      reason = window.prompt('Por favor, indique el motivo de la cancelación:') || '';
+      if (!reason.trim()) return alert('El motivo es obligatorio para cancelar.');
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.patch(`http://localhost:3001/api/appointments/${id}/status`, 
+        { status, reason }, 
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchData(); // Refresh
+    } catch (error) {
+      console.error('Error updating status', error);
+      alert('Error al actualizar el estado.');
+    }
+  };
 
   const getStatusBadgeClass = (status: string) => {
     switch(status) {
@@ -56,6 +77,7 @@ export default function AdminAppointmentsPage() {
               <th>Profesional</th>
               <th>Tratamiento</th>
               <th>Estado</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -82,12 +104,27 @@ export default function AdminAppointmentsPage() {
                   <span className={`${styles.statusBadge} ${getStatusBadgeClass(app.status)}`}>
                     {app.status.charAt(0).toUpperCase() + app.status.slice(1)}
                   </span>
+                  {app.status === 'cancelado' && app.cancellationReason && (
+                    <span className={styles.reasonText}>Motive: {app.cancellationReason}</span>
+                  )}
+                </td>
+                <td>
+                  {app.status !== 'cancelado' && (
+                    <button 
+                      onClick={() => handleUpdateStatus(app._id, 'cancelado')}
+                      className={styles.cancelBtn}
+                      title="Cancelar turno"
+                    >
+                      <Trash2 size={14} />
+                      Cancelar
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
             {appointments.length === 0 && (
               <tr>
-                <td colSpan={6} className={styles.emptyState}>No hay turnos registrados en el sistema.</td>
+                <td colSpan={7} className={styles.emptyState}>No hay turnos registrados en el sistema.</td>
               </tr>
             )}
           </tbody>

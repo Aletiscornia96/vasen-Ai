@@ -69,8 +69,12 @@ export class AppointmentsService {
     return this.appointmentModel.find({ doctorId }).populate('doctorId specialtyId').sort({ date: -1, timeStart: -1 }).exec();
   }
 
-  async updateStatus(id: string, status: string) {
-    return this.appointmentModel.findByIdAndUpdate(id, { status }, { new: true }).exec();
+  async updateStatus(id: string, status: string, reason?: string) {
+    const update: any = { status };
+    if (status === 'cancelado' && reason) {
+      update.cancellationReason = reason;
+    }
+    return this.appointmentModel.findByIdAndUpdate(id, update, { new: true }).exec();
   }
 
   async getStats() {
