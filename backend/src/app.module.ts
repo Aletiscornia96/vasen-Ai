@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SpecialtiesModule } from './specialties/specialties.module';
 import { DoctorsModule } from './doctors/doctors.module';
@@ -25,5 +27,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     AuthModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
