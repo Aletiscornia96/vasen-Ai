@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
 import API_URL from '@/lib/api-url';
-import styles from './BookingWizard.module.css';
+import styles from './WizardSteps.module.css';
 import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye, Stethoscope } from 'lucide-react';
 
 interface Props {
