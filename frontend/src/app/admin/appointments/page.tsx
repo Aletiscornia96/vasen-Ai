@@ -54,6 +54,7 @@ export default function AdminAppointmentsPage() {
     switch(status) {
       case 'completado': return styles.statusCompleted;
       case 'cancelado': return styles.statusCancelled;
+      case 'ausente': return styles.statusAbsent;
       case 'pendiente': default: return styles.statusPending;
     }
   };

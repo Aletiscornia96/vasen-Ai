@@ -104,6 +104,11 @@
   color: #b91c1c;
 }
 
+.statusAbsent {
+  background: #f1f5f9;
+  color: #475569;
+}
+
 .patientInfo {
   display: flex;
   flex-direction: column;
@@ -135,8 +140,16 @@
 
 .actions {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-top: auto;
+}
+
+@media (min-width: 1200px) {
+  .actions {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 }
 
 .actions button {
@@ -163,13 +176,17 @@
   background: #bbf7d0;
 }
 
-.cancelBtn {
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
 .cancelBtn:hover {
   background: #fecaca;
+}
+
+.absentBtn {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.absentBtn:hover {
+  background: #e2e8f0;
 }
 
 .actionsStatic {

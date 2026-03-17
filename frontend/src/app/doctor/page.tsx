@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { CheckCircle2, XCircle } from 'lucide-react';
+import { CheckCircle2, XCircle, UserX } from 'lucide-react';
 import styles from './DoctorAgenda.module.css';
 
 export default function DoctorAgendaPage() {
@@ -33,8 +33,8 @@ export default function DoctorAgendaPage() {
   const updateStatus = async (id: string, status: string) => {
     let reason = '';
     if (status === 'cancelado') {
-      reason = window.prompt('Indique el motivo de la cancelación / inasistencia:') || '';
-      if (!reason.trim()) return alert('El motivo es obligatorio.');
+      reason = window.prompt('Indique el motivo de la cancelación:') || '';
+      if (!reason.trim()) return alert('El motivo es obligatorio para cancelar el turno.');
     }
 
     try {
@@ -53,6 +53,7 @@ export default function DoctorAgendaPage() {
     switch(status) {
       case 'completado': return styles.statusCompleted;
       case 'cancelado': return styles.statusCancelled;
+      case 'ausente': return styles.statusAbsent;
       case 'pendiente': default: return styles.statusPending;
     }
   };
@@ -102,19 +103,25 @@ export default function DoctorAgendaPage() {
                   onClick={() => updateStatus(app._id, 'completado')}
                   className={styles.completeBtn}
                 >
-                  <CheckCircle2 size={18} /> Asistió / Completar
+                  <CheckCircle2 size={18} /> Asistió
+                </button>
+                <button 
+                  onClick={() => updateStatus(app._id, 'ausente')}
+                  className={styles.absentBtn}
+                >
+                  <UserX size={18} /> Inasistencia
                 </button>
                 <button 
                   onClick={() => updateStatus(app._id, 'cancelado')}
                   className={styles.cancelBtn}
                 >
-                  <XCircle size={18} /> Cancelar / No asistió
+                  <XCircle size={18} /> Cancelar Turno
                 </button>
               </div>
             )}
             {app.status !== 'pendiente' && app.status !== 'cancelado' && (
               <div className={styles.actionsStatic}>
-                Marcado como {app.status}
+                Estado: {app.status}
               </div>
             )}
           </div>

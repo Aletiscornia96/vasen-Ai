@@ -118,6 +118,11 @@
   color: #b91c1c;
 }
 
+.statusAbsent {
+  background: #f1f5f9;
+  color: #475569;
+}
+
 .emptyState {
   text-align: center;
   color: #94a3b8;
