@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Clock, Calendar, Save, Trash2 } from 'lucide-react';
 import API_URL from '@/lib/api-url';
-import styles from './DoctorDisponibilidad.module.css';
+import styles from './Disponibilidad.module.css';
 
 const DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
