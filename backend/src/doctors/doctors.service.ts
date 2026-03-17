@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Doctor, DoctorDocument } from './doctor.schema';
@@ -27,7 +27,19 @@ export class DoctorsService {
   }
 
   async findById(id: string) {
-    return this.doctorModel.findById(id).exec();
+    console.log('DoctorsService.findById searching for ID:', id);
+    if (!id) throw new NotFoundException('ID de médico no proporcionado');
+    try {
+      const doctor = await this.doctorModel.findById(id).populate('specialtyId').exec();
+      if (!doctor) {
+        console.log('Doctor not found in database for ID:', id);
+        throw new NotFoundException('Profesional no encontrado');
+      }
+      return doctor;
+    } catch (e) {
+      console.error('Error in DoctorsService.findById:', e.message);
+      throw e;
+    }
   }
 
   async create(createDoctorDto: any) {

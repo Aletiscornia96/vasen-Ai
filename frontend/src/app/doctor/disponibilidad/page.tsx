@@ -87,7 +87,59 @@ export default function DoctorDisponibilidadPage() {
 
   return (
     <div className={styles.container}>
-      {/* ... previous card ... */}
+      <div className={styles.card}>
+        <div className={styles.cardHeader}>
+          <Clock size={24} className={styles.headerIcon} />
+          <div>
+            <h3>Preferencias de Turnos</h3>
+            <p>Configurá la duración de tus consultas y tu horario semanal.</p>
+          </div>
+        </div>
+
+        <div className={styles.settingGroup}>
+          <label>Duración de cada turno (minutos)</label>
+          <select 
+            value={slotDuration} 
+            onChange={(e) => setSlotDuration(parseInt(e.target.value))}
+            className={styles.select}
+          >
+            <option value={15}>15 minutos</option>
+            <option value={30}>30 minutos</option>
+            <option value={45}>45 minutos</option>
+            <option value={60}>60 minutos</option>
+          </select>
+        </div>
+
+        <div className={styles.scheduleGrid}>
+          <h4>Tu Horario Semanal</h4>
+          <p className={styles.hint}>Ingresá rangos como "09:00-13:00, 14:00-18:00". Separá con comas.</p>
+          
+          {DAYS.map(day => (
+            <div key={day} className={styles.dayRow}>
+              <span className={styles.dayName}>{day}</span>
+              <input 
+                type="text"
+                placeholder="Ej: 09:00-17:00"
+                defaultValue={schedule[day]?.join(', ') || ''}
+                onBlur={(e) => updateDayRanges(day, e.target.value)}
+                className={styles.input}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.footer}>
+          {message && <span className={styles.successMsg}>{message}</span>}
+          <button 
+            onClick={handleSaveSettings} 
+            disabled={saving}
+            className={styles.saveBtn}
+          >
+            <Save size={18} />
+            {saving ? 'Guardando...' : 'Guardar Cambios'}
+          </button>
+        </div>
+      </div>
       
       <div className={styles.card}>
         <div className={styles.cardHeader}>

@@ -20,6 +20,7 @@ export class AuthService {
   }
 
   async login(user: any) {
+    console.log('AuthService.login generating token for user:', user.email, 'doctorId:', user.doctorId);
     const payload = { email: user.email, sub: user._id, role: user.role, doctorId: user.doctorId };
     return {
       access_token: this.jwtService.sign(payload),
