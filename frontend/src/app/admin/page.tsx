@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { CalendarCheck, CalendarClock, CalendarX, TrendingUp } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 import styles from './AdminDashboard.module.css';
 
 interface DashboardStats {
@@ -22,7 +23,7 @@ export default function AdminDashboardPage() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:3001/api/appointments/stats', {
+        const res = await axios.get(`${API_URL}/appointments/stats`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         

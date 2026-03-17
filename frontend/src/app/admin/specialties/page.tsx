@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PlusCircle, Power, PowerOff } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 import styles from './Specialties.module.css';
 
 export default function AdminSpecialtiesPage() {
@@ -17,7 +18,7 @@ export default function AdminSpecialtiesPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3001/api/specialties/admin', {
+      const res = await axios.get(`${API_URL}/specialties`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSpecialties(res.data);
@@ -36,7 +37,7 @@ export default function AdminSpecialtiesPage() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3001/api/specialties', { name, description }, {
+      await axios.post(`${API_URL}/specialties`, { name, description }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setName('');
@@ -54,9 +55,9 @@ export default function AdminSpecialtiesPage() {
       const headers = { Authorization: `Bearer ${token}` };
       
       if (currentlyActive) {
-        await axios.delete(`http://localhost:3001/api/specialties/${id}`, { headers });
+        await axios.delete(`${API_URL}/specialties/${id}`, { headers });
       } else {
-        await axios.patch(`http://localhost:3001/api/specialties/${id}/activate`, {}, { headers });
+        await axios.patch(`${API_URL}/specialties/${id}/activate`, {}, { headers });
       }
       fetchData(); // Refresh list
     } catch (error) {

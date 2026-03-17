@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Save, AlertCircle, Clock, Calendar } from 'lucide-react';
-import styles from './Disponibilidad.module.css';
+import { Clock, Calendar, Save, Trash2 } from 'lucide-react';
+import API_URL from '@/lib/api-url';
+import styles from './DoctorDisponibilidad.module.css';
 
 const DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
@@ -22,7 +23,7 @@ export default function DoctorDisponibilidadPage() {
   const fetchDoctor = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3001/api/doctors/me', {
+      const res = await axios.get(`${API_URL}/doctors/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDoctor(res.data);
@@ -39,10 +40,10 @@ export default function DoctorDisponibilidadPage() {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      await axios.patch('http://localhost:3001/api/doctors/me/settings', { slotDuration }, {
+      await axios.patch(`${API_URL}/doctors/me/settings`, { slotDuration }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      await axios.patch('http://localhost:3001/api/doctors/me/schedule', schedule, {
+      await axios.patch(`${API_URL}/doctors/me/schedule`, { weeklySchedule: schedule }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessage('Cambios guardados con éxito');
@@ -67,10 +68,10 @@ export default function DoctorDisponibilidadPage() {
     if (!blockDate || !blockStart || !blockEnd) return alert('Completá todos los campos');
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3001/api/appointments/block', {
+      await axios.post(`${API_URL}/appointments/block`, {
         date: blockDate,
         timeStart: blockStart,
-        timeEnd: blockEnd
+        timeEnd: '23:59'
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });

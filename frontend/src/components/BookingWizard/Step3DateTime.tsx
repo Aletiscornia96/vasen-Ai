@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format, addDays, startOfToday, isSunday } from 'date-fns';
 import { es } from 'date-fns/locale';
+import API_URL from '@/lib/api-url';
 import { BookingData } from './BookingWizard';
 import styles from './WizardSteps.module.css';
 
@@ -42,7 +43,7 @@ export default function Step3DateTime({ data, updateData, onNext, onBack }: Prop
       updateData({ date: formattedDate, timeStart: null, timeEnd: null }); // reset slot
 
       try {
-        const res = await axios.get(`http://localhost:3001/api/slots?doctorId=${data.doctorId}&date=${formattedDate}`);
+        const res = await axios.get(`${API_URL}/slots?doctorId=${data.doctorId}&date=${formattedDate}`);
         setSlots(res.data.slots);
       } catch (err) {
         console.error('Error fetching slots', err);

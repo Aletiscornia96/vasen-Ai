@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { UserPlus, UserMinus, UserCheck, Trash2 } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 import styles from './Doctors.module.css';
 
 export default function AdminDoctorsPage() {
@@ -22,8 +23,8 @@ export default function AdminDoctorsPage() {
       const headers = { Authorization: `Bearer ${token}` };
       
       const [docsRes, specsRes] = await Promise.all([
-        axios.get('http://localhost:3001/api/doctors/admin', { headers }),
-        axios.get('http://localhost:3001/api/specialties/admin', { headers })
+        axios.get(`${API_URL}/doctors/admin`, { headers }),
+        axios.get(`${API_URL}/specialties/admin`, { headers })
       ]);
       
       setDoctors(docsRes.data);
@@ -43,7 +44,7 @@ export default function AdminDoctorsPage() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3001/api/doctors', {
+      await axios.post(`${API_URL}/doctors`, {
         name,
         role,
         specialtyId,
@@ -74,10 +75,10 @@ export default function AdminDoctorsPage() {
       
       if (currentlyActive) {
         // Soft delete (Deactivate)
-        await axios.delete(`http://localhost:3001/api/doctors/${id}`, { headers });
+        await axios.delete(`${API_URL}/doctors/${id}`, { headers });
       } else {
         // Activate
-        await axios.patch(`http://localhost:3001/api/doctors/${id}/activate`, {}, { headers });
+        await axios.patch(`${API_URL}/doctors/${id}/activate`, {}, { headers });
       }
       fetchData(); // Refresh list
     } catch (error) {

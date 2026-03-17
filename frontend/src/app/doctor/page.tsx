@@ -5,6 +5,7 @@ import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { CheckCircle2, XCircle, UserX } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 import styles from './DoctorAgenda.module.css';
 
 export default function DoctorAgendaPage() {
@@ -15,7 +16,7 @@ export default function DoctorAgendaPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3001/api/appointments', {
+      const res = await axios.get(`${API_URL}/appointments`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAppointments(res.data);
@@ -39,7 +40,7 @@ export default function DoctorAgendaPage() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3001/api/appointments/${id}/status`, { status, reason }, {
+      await axios.patch(`${API_URL}/appointments/${id}/status`, { status, reason }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchData();

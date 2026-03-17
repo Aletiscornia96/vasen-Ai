@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import API_URL from '@/lib/api-url';
 import styles from './BookingWizard.module.css';
 
 // Steps
@@ -46,6 +47,7 @@ export default function BookingWizard() {
   const [data, setData] = useState<BookingData>(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [bookingId, setBookingId] = useState<string | null>(null);
 
   const nextStep = () => setStep((s) => Math.min(s + 1, 5));
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
@@ -58,20 +60,23 @@ export default function BookingWizard() {
     setStep(1);
     setData(initialData);
     setError(null);
+    setBookingId(null);
   };
 
   const submitBooking = async () => {
     setLoading(true);
     setError(null);
     try {
-      await axios.post('http://localhost:3001/api/appointments', {
+      const appointmentData = {
         specialtyId: data.specialtyId,
         doctorId: data.doctorId,
         date: data.date,
         timeStart: data.timeStart,
         timeEnd: data.timeEnd,
         patient: data.patient,
-      });
+      };
+      const res = await axios.post(`${API_URL}/appointments`, appointmentData);
+      setBookingId(res.data._id);
       nextStep(); // Go to success step
     } catch (err: any) {
       setError(

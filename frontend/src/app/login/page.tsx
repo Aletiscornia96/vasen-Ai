@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import API_URL from '@/lib/api-url';
 import styles from './Login.module.css';
 
 export default function LoginPage() {
@@ -18,7 +19,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/login', {
+      const res = await axios.post(`${API_URL}/auth/login`, {
         email,
         password
       });

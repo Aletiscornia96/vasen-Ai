@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
-import styles from './WizardSteps.module.css';
+import styles from './BookingWizard.module.css';
 import { User } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 
 interface Props {
   data: BookingData;
@@ -26,7 +27,7 @@ export default function Step2Doctor({ data, updateData, onNext, onBack }: Props)
     
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/doctors?specialtyId=${data.specialtyId}`);
+        const res = await axios.get(`${API_URL}/doctors?specialtyId=${data.specialtyId}`);
         setDoctors(res.data);
       } catch (err) {
         console.error('Error fetching doctors', err);

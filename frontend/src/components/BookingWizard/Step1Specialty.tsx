@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
-import styles from './WizardSteps.module.css';
-import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye } from 'lucide-react';
+import API_URL from '@/lib/api-url';
+import styles from './BookingWizard.module.css';
+import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye, Stethoscope } from 'lucide-react';
 
 interface Props {
   data: BookingData;
@@ -32,9 +33,9 @@ export default function Step1Specialty({ data, updateData, onNext }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSpecialties = async () => {
+    const fetchSpecs = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/specialties');
+        const res = await axios.get(`${API_URL}/specialties`);
         setSpecialties(res.data);
       } catch (err) {
         console.error('Error fetching specialties', err);
@@ -42,7 +43,7 @@ export default function Step1Specialty({ data, updateData, onNext }: Props) {
         setLoading(false);
       }
     };
-    fetchSpecialties();
+    fetchSpecs();
   }, []);
 
   const handleSelect = (s: Specialty) => {

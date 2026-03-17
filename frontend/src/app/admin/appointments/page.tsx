@@ -5,6 +5,7 @@ import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Trash2 } from 'lucide-react';
+import API_URL from '@/lib/api-url';
 import styles from './Appointments.module.css';
 
 export default function AdminAppointmentsPage() {
@@ -15,7 +16,7 @@ export default function AdminAppointmentsPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:3001/api/appointments', {
+      const res = await axios.get(`${API_URL}/appointments`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAppointments(res.data);
@@ -39,7 +40,7 @@ export default function AdminAppointmentsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:3001/api/appointments/${id}/status`, 
+      await axios.patch(`${API_URL}/appointments/${id}/status`, 
         { status, reason }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
