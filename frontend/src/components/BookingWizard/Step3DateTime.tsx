@@ -5,7 +5,6 @@ import axios from 'axios';
 import { format, addDays, startOfToday, isSunday } from 'date-fns';
 import { es } from 'date-fns/locale';
 import API_URL from '@/lib/api-url';
-import './BookingWizard.css';
 import { ChevronLeft, Calendar as CalendarIcon, Clock } from 'lucide-react';
 import { BookingData } from './BookingWizard';
 

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
 import API_URL from '@/lib/api-url';
-import './BookingWizard.css';
 import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye, Stethoscope } from 'lucide-react';
 
 interface Props {

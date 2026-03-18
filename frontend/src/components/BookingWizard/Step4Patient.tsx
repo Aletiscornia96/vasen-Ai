@@ -1,7 +1,6 @@
 'use client';
 
 import { BookingData } from './BookingWizard';
-import './BookingWizard.css';
 import { ChevronLeft } from 'lucide-react';
 
 interface Props {

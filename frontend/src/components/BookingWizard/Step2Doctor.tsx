@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
-import './BookingWizard.css';
 import { User, ChevronLeft } from 'lucide-react';
 import API_URL from '@/lib/api-url';
 

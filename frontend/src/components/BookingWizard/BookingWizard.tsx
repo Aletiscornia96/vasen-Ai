@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import API_URL from '@/lib/api-url';
-import './BookingWizard.css';
 
 // Steps
 import Step1Specialty from './Step1Specialty';
