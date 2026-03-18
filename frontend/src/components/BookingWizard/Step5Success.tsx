@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './BookingWizard.module.css';
 import { CheckCircle2 } from 'lucide-react';
 

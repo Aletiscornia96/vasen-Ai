@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format, addDays, startOfToday, isSunday } from 'date-fns';

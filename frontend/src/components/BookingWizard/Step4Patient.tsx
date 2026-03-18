@@ -1,3 +1,5 @@
+'use client';
+
 import { BookingData } from './BookingWizard';
 import styles from './BookingWizard.module.css';
 
