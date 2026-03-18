@@ -29,7 +29,7 @@ export default function Step4Patient({ data, updateData, onSubmit, onBack, loadi
         <div className="bw-badges">
           <span className="bw-pillBadge">{data.specialtyName}</span>
           <span className="bw-pillBadge">{data.doctorName}</span>
-          <span className="bw-pillBadge">{data.date} - {data.slot}</span>
+          <span className="bw-pillBadge">{data.date} - {data.timeStart}hs</span>
         </div>
       </div>
 
