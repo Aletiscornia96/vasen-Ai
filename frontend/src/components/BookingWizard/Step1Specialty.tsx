@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
 import API_URL from '@/lib/api-url';
-import styles from './BookingWizard.module.css';
+import './BookingWizard.css';
 import { Sparkles, Activity, Hand, Droplet, Star, HeartPulse, Eye, Stethoscope } from 'lucide-react';
 
 interface Props {
@@ -53,25 +53,25 @@ export default function Step1Specialty({ data, updateData, onNext }: Props) {
     onNext();
   };
 
-  if (loading) return <div className={styles.loading}>Cargando especialidades...</div>;
+  if (loading) return <div className="bw-loading">Cargando especialidades...</div>;
 
   return (
-    <div className={styles.stepContainer}>
-      <h2 className={styles.title}>¿Qué tipo de tratamiento buscás?</h2>
-      <p className={styles.subtitle}>Seleccioná la especialidad para tu turno.</p>
+    <div className="bw-stepContainer">
+      <h2 className="bw-title">¿Qué tipo de tratamiento buscás?</h2>
+      <p className="bw-subtitle">Seleccioná la especialidad para tu turno.</p>
       
-      <div className={styles.grid}>
+      <div className="bw-grid">
         {specialties.map((s) => (
           <button
             key={s._id}
-            className={`${styles.card} ${data.specialtyId === s._id ? styles.cardActive : ''}`}
+            className={`bw-card ${data.specialtyId === s._id ? 'bw-cardActive' : ''}`}
             onClick={() => handleSelect(s)}
           >
-            <div className={styles.cardIcon}>
+            <div className="bw-cardIcon">
               {getIconForSpecialty(s.name)}
             </div>
-            <h3 className={styles.cardTitle}>{s.name}</h3>
-            <p className={styles.cardDesc}>{s.description}</p>
+            <h3 className="bw-cardTitle">{s.name}</h3>
+            <p className="bw-cardDesc">{s.description}</p>
           </button>
         ))}
       </div>

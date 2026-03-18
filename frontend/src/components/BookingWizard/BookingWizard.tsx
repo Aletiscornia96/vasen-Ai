@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import API_URL from '@/lib/api-url';
-import styles from './BookingWizard.module.css';
+import './BookingWizard.css';
 
 // Steps
 import Step1Specialty from './Step1Specialty';
@@ -87,19 +87,35 @@ export default function BookingWizard() {
     }
   };
 
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <Step1Specialty data={data} updateData={updateData} onNext={nextStep} />;
+      case 2:
+        return <Step2Doctor data={data} updateData={updateData} onNext={nextStep} onBack={prevStep} />;
+      case 3:
+        return <Step3DateTime data={data} updateData={updateData} onNext={nextStep} onBack={prevStep} />;
+      case 4:
+        return <Step4Patient data={data} updateData={updateData} onSubmit={submitBooking} onBack={prevStep} loading={loading} />;
+      case 5:
+        return <Step5Success onReset={resetFlow} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className={styles.wizardWrapper}>
-      <div className={styles.container}>
-        
+    <div className="bw-wizardWrapper">
+      <div className="bw-container">
         {/* Header / Stepper Progress */}
         {step < 5 && (
-          <div className={styles.header}>
-            <div className={styles.progressText}>
+          <div className="bw-header">
+            <div className="bw-progressText">
               Paso {step} de 4
             </div>
-            <div className={styles.progressBar}>
+            <div className="bw-progressBar">
               <div 
-                className={styles.progressFill} 
+                className="bw-progressFill" 
                 style={{ width: `${(step / 4) * 100}%` }}
               ></div>
             </div>
@@ -108,13 +124,13 @@ export default function BookingWizard() {
 
         {/* Error message generic */}
         {error && (
-          <div className={styles.errorAlert}>
+          <div className="bw-errorAlert">
             {error}
           </div>
         )}
 
         {/* Dynamic Content */}
-        <div className={styles.stepContent}>
+        <div className="bw-stepContent">
           {step === 1 && (
             <Step1Specialty 
               data={data} 
@@ -153,5 +169,4 @@ export default function BookingWizard() {
         </div>
       </div>
     </div>
-  );
-}
+  )

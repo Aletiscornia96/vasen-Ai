@@ -5,8 +5,9 @@ import axios from 'axios';
 import { format, addDays, startOfToday, isSunday } from 'date-fns';
 import { es } from 'date-fns/locale';
 import API_URL from '@/lib/api-url';
+import './BookingWizard.css';
+import { ChevronLeft, Calendar as CalendarIcon, Clock } from 'lucide-react';
 import { BookingData } from './BookingWizard';
-import styles from './BookingWizard.module.css';
 
 interface Props {
   data: BookingData;
@@ -70,56 +71,61 @@ export default function Step3DateTime({ data, updateData, onNext, onBack }: Prop
   };
 
   return (
-    <div className={styles.stepContainer}>
-      <div className={styles.navHeader}>
-        <button onClick={onBack} className={styles.backBtn}>← Volver</button>
-        <div className={styles.badges}>
-          <span className={styles.pillBadge}>{data.specialtyName}</span>
-          <span className={styles.pillBadge}>{data.doctorName}</span>
+    <div className="bw-stepContainer">
+      <div className="bw-navHeader">
+        <button className="bw-backBtn" onClick={onBack}>
+          <ChevronLeft size={16} /> Volver
+        </button>
+        <div className="bw-badges">
+          <span className="bw-pillBadge">{data.specialtyName}</span>
+          <span className="bw-pillBadge">{data.doctorName}</span>
         </div>
       </div>
 
-      <h2 className={styles.title}>¿Cuándo querés venir?</h2>
-      <p className={styles.subtitle}>Seleccioná la fecha y horario de tu turno.</p>
+      <h2 className="bw-title">Fecha y Hora</h2>
+      <p className="bw-subtitle">Seleccioná el momento que mejor te quede.</p>
       
-      {/* Date Carousel */}
-      <div className={styles.dateCarousel}>
-        {dates.map((d, i) => {
-          const isSelected = selectedDate?.getTime() === d.getTime();
+      <div className="bw-dateCarousel">
+        {dates.map((d) => {
+          const isSelected = selectedDate && format(d, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
           return (
-            <button
-              key={i}
-              className={`${styles.dateBlock} ${isSelected ? styles.dateBlockSelected : ''}`}
+            <div
+              key={d.toISOString()}
+              className={`bw-dateBlock ${isSelected ? 'bw-dateBlockSelected' : ''}`}
               onClick={() => setSelectedDate(d)}
             >
-              <span className={styles.dateDayName}>{format(d, 'EEE', { locale: es })}</span>
-              <span className={styles.dateDayNum}>{format(d, 'd')}</span>
-            </button>
-          )
+              <span className="bw-dateDayName">{format(d, 'eee', { locale: es })}</span>
+              <span className="bw-dateDayNum">{format(d, 'd')}</span>
+            </div>
+          );
         })}
       </div>
 
-      {/* Slots Grid */}
-      <div className={styles.slotsSection}>
-        <h3 className={styles.slotsTitle}>Horarios disponibles</h3>
-        {loadingSlots ? (
-          <div className={styles.loadingSmall}>Buscando horarios...</div>
-        ) : slots.length === 0 ? (
-          <div className={styles.emptyState}>No hay horarios disponibles para esta fecha.</div>
-        ) : (
-          <div className={styles.slotsGrid}>
-            {slots.map((slot) => (
-              <button
-                key={slot}
-                className={styles.slotBtn}
-                onClick={() => handleSlotSelect(slot)}
-              >
-                {slot} hs
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      {selectedDate && (
+        <div className="bw-slotsSection">
+          <h3 className="bw-slotsTitle">
+            Horarios para el {format(selectedDate, "d 'de' MMMM", { locale: es })}
+          </h3>
+          
+          {loadingSlots ? (
+            <div className="bw-loadingSmall">Buscando turnos...</div>
+          ) : slots.length === 0 ? (
+            <div className="bw-emptyState">No hay turnos disponibles para este día.</div>
+          ) : (
+            <div className="bw-slotsGrid">
+              {slots.map((s) => (
+                <button
+                  key={s}
+                  className="bw-slotBtn"
+                  onClick={() => handleSlotSelect(s)}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

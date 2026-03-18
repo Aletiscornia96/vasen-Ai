@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
-import styles from './BookingWizard.module.css';
-import { User } from 'lucide-react';
+import './BookingWizard.css';
+import { User, ChevronLeft } from 'lucide-react';
 import API_URL from '@/lib/api-url';
 
 interface Props {
@@ -18,6 +18,7 @@ type Doctor = {
   _id: string;
   name: string;
   role: string;
+  experience?: string; // Added experience based on new code
 };
 
 export default function Step2Doctor({ data, updateData, onNext, onBack }: Props) {
@@ -45,39 +46,43 @@ export default function Step2Doctor({ data, updateData, onNext, onBack }: Props)
     onNext();
   };
 
-  if (loading) return <div className={styles.loading}>Cargando profesionales...</div>;
+  if (loading) return <div className="bw-loading">Buscando profesionales...</div>;
 
   return (
-    <div className={styles.stepContainer}>
-      <div className={styles.navHeader}>
-        <button onClick={onBack} className={styles.backBtn}>← Volver</button>
-        <span className={styles.pillBadge}>{data.specialtyName}</span>
+    <div className="bw-stepContainer">
+      <div className="bw-navHeader">
+        <button className="bw-backBtn" onClick={onBack}>
+          <ChevronLeft size={16} /> Volver
+        </button>
+        <div className="bw-badges">
+          <span className="bw-pillBadge">{data.specialtyName}</span>
+        </div>
       </div>
 
-      <h2 className={styles.title}>Elegí un profesional</h2>
-      <p className={styles.subtitle}>Nuestro equipo está listo para atenderte.</p>
+      <h2 className="bw-title">Elegí tu profesional</h2>
+      <p className="bw-subtitle">Contamos con un equipo altamente calificado.</p>
       
-      {doctors.length === 0 ? (
-        <div className={styles.emptyState}>No hay profesionales disponibles para esta especialidad en este momento.</div>
-      ) : (
-        <div className={styles.grid}>
-          {doctors.map((d) => (
+      <div className="bw-grid">
+        {doctors.length === 0 ? (
+          <div className="bw-emptyState">No hay profesionales disponibles para esta especialidad.</div>
+        ) : (
+          doctors.map((d) => (
             <button
               key={d._id}
-              className={`${styles.card} ${styles.cardDoctor} ${data.doctorId === d._id ? styles.cardActive : ''}`}
+              className={`bw-card bw-cardDoctor ${data.doctorId === d._id ? 'bw-cardActive' : ''}`}
               onClick={() => handleSelect(d)}
             >
-              <div className={styles.avatar}>
-                <User size={32} />
+              <div className="bw-avatar">
+                <User size={24} />
               </div>
-              <div className={styles.doctorInfo}>
-                <h3 className={styles.cardTitle}>{d.name}</h3>
-                <p className={styles.cardDesc}>{d.role}</p>
+              <div style={{ flex: 1 }}>
+                <h3 className="bw-cardTitle" style={{ fontSize: '1.1rem' }}>{d.name}</h3>
+                <p className="bw-cardDesc">{d.experience || 'Especialista'}</p>
               </div>
             </button>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 }
