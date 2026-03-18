@@ -4,7 +4,7 @@ import { format, addDays, startOfToday, isSunday } from 'date-fns';
 import { es } from 'date-fns/locale';
 import API_URL from '@/lib/api-url';
 import { BookingData } from './BookingWizard';
-import styles from './WizardSteps.module.css';
+import styles from './BookingWizard.module.css';
 
 interface Props {
   data: BookingData;

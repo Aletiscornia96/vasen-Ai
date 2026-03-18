@@ -1,4 +1,4 @@
-import styles from './WizardSteps.module.css';
+import styles from './BookingWizard.module.css';
 import { CheckCircle2 } from 'lucide-react';
 
 interface Props {

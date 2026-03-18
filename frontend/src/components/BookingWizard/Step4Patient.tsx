@@ -1,5 +1,5 @@
 import { BookingData } from './BookingWizard';
-import styles from './WizardSteps.module.css';
+import styles from './BookingWizard.module.css';
 
 interface Props {
   data: BookingData;

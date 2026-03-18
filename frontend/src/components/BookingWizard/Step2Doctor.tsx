@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BookingData } from './BookingWizard';
-import styles from './WizardSteps.module.css';
+import styles from './BookingWizard.module.css';
 import { User } from 'lucide-react';
 import API_URL from '@/lib/api-url';
 
