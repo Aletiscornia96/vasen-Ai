@@ -6,10 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   
-  const allowedOrigins = configService.get<string>('ALLOWED_ORIGINS')?.split(',') || ['http://localhost:3000'];
+  const allowedOrigins = configService.get<string>('ALLOWED_ORIGINS');
   
   app.enableCors({
-    origin: allowedOrigins,
+    origin: allowedOrigins === '*' ? true : (allowedOrigins?.split(',') || ['http://localhost:3000']),
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
